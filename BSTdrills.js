@@ -81,42 +81,42 @@ main();
 //this function will add all the node values of the tree recursively
 
 //number 5
-let heightTree = new BinarySearchTree();
-heightTree.insert(3, 3);
-heightTree.insert(1, 1);
-heightTree.insert(4, 4);
-heightTree.insert(6, 6);
-heightTree.insert(9, 9);
-heightTree.insert(2, 2);
-heightTree.insert(5, 5);
-heightTree.insert(7, 7);
+let sampleTree = new BinarySearchTree();
+sampleTree.insert(3, 3);
+sampleTree.insert(1, 1);
+sampleTree.insert(4, 4);
+sampleTree.insert(6, 6);
+sampleTree.insert(9, 9);
+sampleTree.insert(2, 2);
+sampleTree.insert(5, 5);
+sampleTree.insert(7, 7);
 
-function height(node) {
+function height(tree) {
     let leftHeight = 0;
     let rightHeight = 0;
 
-    if (!node) return 0;
+    if (!tree) return 0;
 
-    leftHeight = height(node.left);
-    rightHeight = height(node.right);
+    leftHeight = height(tree.left);
+    rightHeight = height(tree.right);
 
     return Math.max(leftHeight, rightHeight) + 1;
 };
 
-console.log(height(heightTree));
+console.log(height(sampleTree));
 
 //number 6
-function isItBST (tree) {
-    if(tree.left){
-        if(tree.left.key < tree.key){
+function isItBST(tree) {
+    if (tree.left) {
+        if (tree.left.key < tree.key) {
             return isItBST(tree.left)
         } else {
             return false
         }
     }
 
-    if(tree.right){
-        if(tree.right.key > tree.key){
+    if (tree.right) {
+        if (tree.right.key > tree.key) {
             return isItBST(tree.right)
         } else {
             return false
@@ -126,6 +126,67 @@ function isItBST (tree) {
     return true;
 }
 
-console.log(isItBST(heightTree));
+console.log(isItBST(sampleTree));
 
 //number 7
+function nthLargestNode(tree) {
+
+    let current = tree;
+
+    while (current.right !== null) {
+        current = current.right;
+    }
+
+    let parent = current.parent;
+    if (current.left !== null && parent.left !== null) {
+        return parent.key;
+    }
+
+    if (parent.left !== null) {
+        let newNode = parent.left;
+
+        while (newNode.right !== null) {
+            newNode = newNode.right;
+        }
+        return newNode;
+    }
+};
+
+console.log(nthLargestNode(sampleTree));
+
+//number 8
+
+function balance(tree) {
+    let left = height(tree.left);
+    let right = height(tree.eight);
+
+    if (Math.abs(right - left) < 1) {
+        return true;
+    } else if (Math.abs(right - left) > 1) {
+        return false;
+    }
+}
+
+console.log(balance(sampleTree));
+
+//number 9
+
+const arr1 = [3, 5, 4, 6, 1, 0, 2]
+const arr2 = [3, 1, 5, 2, 4, 6, 0]
+
+function sameBST(arr1, arr2) {
+
+    let sortedArray1 = arr1.sort();
+    let sortedArray2 = arr2.sort();
+
+    let a = sortedArray1.toString();
+    let b = sortedArray2.toString();
+
+    if (a === b) {
+        return true
+    } else {
+        return false
+    }
+}
+
+console.log(sameBST(arr1, arr2));
