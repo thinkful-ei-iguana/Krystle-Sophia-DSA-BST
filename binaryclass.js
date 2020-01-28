@@ -70,20 +70,6 @@ class BinarySearchTree {
             throw new Error('Key Error');
         }
     }
-    findParent(key) {
-        if (this.key == key) {
-            return (`${this.parent.key} is the parent of ${this.key}`);
-        }
-        else if (key < this.key && this.left) {
-            return this.left.findParent(key);
-        }
-        else if (key > this.key && this.right) {
-            return this.right.findParent(key);
-        }
-        else {
-            throw new Error('Key Error');
-        }
-    }
     remove(key) {
         if (this.key == key) {
             if (this.left && this.right) {
